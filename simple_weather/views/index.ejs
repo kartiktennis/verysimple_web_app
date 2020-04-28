@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'> -->
+  </head>
+  <style>
+   .container {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+  </style>
+  <body>
+    <div class="container">
+        <!-- <form action="/" method="post">
+          <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
+          <input type="submit" class="ghost-button" value="Get Weather">
+        </form> -->
+        <p>
+            latitude: <span id="latitude"></span>&deg;<br />
+            longitude: <span id="longitude"></span>&deg; <br />
+            <span id="weather"></span><br />
+        </p>
+        <button onclick="getLocation()">Get Weather</button>
+        <script>
+            var coords = null
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async position => {
+                lat = position.coords.latitude;
+                long = position.coords.longitude;
+                console.log(lat, long);
+                document.getElementById('latitude').textContent = lat;
+                document.getElementById('longitude').textContent = long;
+                var data = {lat, long}
+
+                const options = {
+                    method: "POST", 
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                const response = await fetch('/coords', options)
+                const json = await response.json()
+                console.log(json)
+                weather_area = document.getElementById('weather')
+                weather_area.innerHTML = "\n" + json['message']
+                });
+              }
+            }
+        
+        </script>
+    </div>
+  </body>
+</html>
