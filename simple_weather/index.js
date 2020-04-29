@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 
 
 
-var apiKey = 'ca85f1f467fc420f8e4191305202804'
+var apiKey = '**************************'
 var coords
 
 // function showError(error) {
@@ -33,7 +33,7 @@ app.post('/coords', async function (req, res) {
     lat = data.lat
     long = data.long
     coords = lat.toString() + "," + long.toString()
-    let url = 'http://api.weatherapi.com/v1/current.json?key=ca85f1f467fc420f8e4191305202804&q='+coords
+    let url = 'http://api.weatherapi.com/v1/current.json?key=${apiKey}='+coords
 
     var options = {
         uri: url,
