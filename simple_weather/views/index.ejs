@@ -27,7 +27,8 @@
             longitude: <span id="longitude"></span>&deg; <br />
             <span id="weather"></span><br />
         </p>
-        <button onclick="getLocation()">Get Weather</button>
+        <button onclick="getLocation()">Is It Sweater Weather?</button><br />
+        <span id="sweater"></span>
         <script>
             var coords = null
             function getLocation() {
@@ -49,9 +50,12 @@
                 };
                 const response = await fetch('/coords', options)
                 const json = await response.json()
-                console.log(json)
+                //console.log(json)
+                var sweater_temp = prompt("What is sweater weather (in degrees Fahrenheit)?", "40");
                 weather_area = document.getElementById('weather')
                 weather_area.innerHTML = "\n" + json['message']
+                sweater_weather = document.getElementById('sweater')
+                sweater_weather.innerHTML = "\n" + (sweater_temp>=json['temp']?"Yes, it's":"No, it's not") + " sweater weather"
                 });
               }
             }
