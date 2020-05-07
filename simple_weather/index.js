@@ -55,7 +55,8 @@ app.post('/coords', async function (req, res) {
             result = "The weather in " + location + ", " + region + ", " + country + "is " + temperature + " degrees farenheit. " + "Time and Date is " + datetime
             res.json({
                 status: "Success",
-                message: result
+                message: result,
+                temp: temperature
             }); 
             
         })
